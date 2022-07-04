@@ -4,11 +4,11 @@ pipeline{
   maven 'maven2'
 }
   stages{
-    stage("git checkout"){
-      steps{
-        git credentialsId: 'ramsrimathi', url: 'https://github.com/ramsrimathi/my-ap',branch:"master"
-      }
-    }
+//    stage("git checkout"){
+//      steps{
+//        git credentialsId: 'ramsrimathi', url: 'https://github.com/ramsrimathi/my-ap',branch:"master"
+//      }
+//    }
     stage("maven build"){
       steps{
         sh "mvn clean package"
