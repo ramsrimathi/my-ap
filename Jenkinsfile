@@ -1,7 +1,7 @@
 pipline {
-  agent any{
+  agent any
     stages{
-      stage("SCM checkout")
+      stage("SCM checkout"){
       steps{
         git credentialsId: 'ramsrimathi', url: 'https://github.com/ramsrimathi/my-ap'
         }
