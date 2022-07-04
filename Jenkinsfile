@@ -1,32 +1,15 @@
-
-pipeline {
-  agent any
-
-  tools {
-    maven 'maven3'
-  }
-  options {
-    buildDiscarder logRotator(daysToKeepStr: '10', numToKeepStr: '7')
-  }
-  parameters {
-    choice choices: ['develop', 'qa', 'master'], description: 'Choose the branch to build', name: 'branchName'
-  }
-  stages {
-    stage('Maven Build') {
-      steps {
-        sh 'mvn clean package'
-      }
+pipline {
+  agent any{
+    stages{
+      stage("SCM checkout")
+      steps{
+        git credentialsId: 'ramsrimathi', url: 'https://github.com/ramsrimathi/my-ap'
+        }
     }
-    stage('Deploy to Tomcat') {
-      steps {
-        tomcatDeploy(["172.31.13.38","172.31.13.38","172.31.13.38"],"ec2-user","tomcat-dev")
+    stage("maven build"){
+      steps{
+        sh "mvn clean package"
       }
-    }
-  }
-  post {
-    success {
-      archiveArtifacts artifacts: 'target/*.war'
-      cleanWs()
     }
   }
 }
