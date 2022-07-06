@@ -10,7 +10,7 @@ pipeline{
         sh "mvn clean package"
       }
     }
-    stage("deploy to dev"){
+    stage("Deploy To Dev"){
       steps{
         tomcatdev("tomcat","ec2-user","172.31.12.240")
       }
